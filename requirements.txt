@@ -3,8 +3,7 @@ uvicorn
 langchain
 langchain-community
 langchain-groq
-langchain-huggingface
-sentence-transformers
+fastembed
 faiss-cpu
 pymupdf
 python-dotenv

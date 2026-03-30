@@ -7,7 +7,7 @@ from pydantic import BaseModel
 from langchain_community.document_loaders import PyMuPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_groq import ChatGroq
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_community.embeddings.fastembed import FastEmbedEmbeddings
 from langchain_community.vectorstores import FAISS
 from langchain_core.prompts import PromptTemplate
 from langchain_core.runnables import RunnablePassthrough
@@ -40,9 +40,9 @@ async def lifespan(app: FastAPI):
             )
             splits = text_splitter.split_documents(docs)
             
-            # LOCAL Free Embeddings (Cost Optimization)
-            print("Loading local zero-cost embeddings model...")
-            embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+            # LOCAL Free Embeddings (Cost & Server Size Optimization)
+            print("Loading ultra-lightweight FastEmbed models...")
+            embeddings = FastEmbedEmbeddings(model_name="BAAI/bge-small-en-v1.5")
             vectorstore = FAISS.from_documents(splits, embeddings)
             retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
             
