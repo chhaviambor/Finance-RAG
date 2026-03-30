@@ -1,0 +1,13 @@
+# Environments
+.env
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE and Project variables
+.vscode/
+
+# Ignore FAISS Index if saved locally (we build it dynamically in lifespan though)
+faiss_index/
